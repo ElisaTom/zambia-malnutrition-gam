@@ -1,0 +1,80 @@
+
+\documentclass[10pt]{article}
+\usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{eurosym}
+\usepackage{amsthm}
+\usepackage{inputenc}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{pdflscape}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{bbm}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{graphicx} 
+\usepackage{graphics}
+\usepackage[comma,authoryear,sort]{natbib}
+%\usepackage{natbib}
+\usepackage{longtable}
+\usepackage[]{threeparttable}
+\usepackage{rotating}
+\usepackage{xcolor}
+\usepackage{comment}
+\usepackage{tikz}
+%\usepackage[inner=3.0cm,outer=3.0cm, top=3.0cm, bottom=3.0cm]{geometry}
+\usepackage{eurosym}
+\usepackage{textcomp}
+%\usepackage[obeyspace]{url}
+\usepackage{makecell}
+%\usepackage{setspace}
+%\usepackage[hypens]{url}  % This makes \url work
+\usepackage{xurl}
+\renewcommand{\baselinestretch}{1.1} 
+
+\begin{document}
+\section*{Malnutrition in Zambia}
+The following dataset is about malnutrition in Zambia (survey in 1992). The data refers to the nutritional condition of children who are between 0 and 5 years old. The nutritional condition is measured by an anthropometric measure called Z-score, which compares the anthropometric status of a child with comparable measures taken from a population (here the reference population is based on white US-American children with wealthy families with a high socioeconomic status). Namely, such a measure is given by 
+$${\rm zscore}_i = \frac{h_i - mh}{\sigma}, $$
+where $h_i$ represents the height of the $i$-th child, $mh$ represents the median height of children belonging to the reference population of the same age group, and $\sigma$ refers to the corresponding standard deviation of the reference population. The  dataset include the following variables 
+\begin{itemize}
+\item \texttt{zscore}: child's Z-score
+\item \texttt{c\_gender}:  gender (1 = male, 0 = female)
+\item \texttt{c\_breastf}: duration of breast-feedings (in months);
+\item \texttt{c\_age}:  child's age (in months);
+\item \texttt{m\_agebirth}: mother's age at birth (in years); 
+\item \texttt{m\_height}:  mother's height (in centimeter);
+\item \texttt{m\_bmi}: mother's body mass index;
+\item \texttt{m\_education}: mother's level of education (1 = no education, 2 = primary school, 3 = secondary school, 4 = higher education);
+\item \texttt{m\_work}: mother's work status (1 = mother working, 0 = mother not working);
+\item \texttt{region}: region of residence in Zambia
+\begin{itemize}
+\item 1 = Central
+\item 2 = Copperbelt
+\item 3 = Eastern 
+\item 4 = Luapula
+\item 5 = Lusaka
+\item 6 = Northern 
+\item 7 = North western
+\item 8 = Southern
+\item 9 = Western
+\end{itemize}
+\item \texttt{district}: district of residence in Zambia (55 districts)
+\end{itemize}
+\end{document}
+
