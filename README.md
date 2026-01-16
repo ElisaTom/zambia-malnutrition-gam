@@ -1,5 +1,3 @@
-# zambia-malnutrition-gam
-Statistical Methods Final Project - Non-linear analysis of malnutrition in Zambia using GAMs
 # Zambia Malnutrition Analysis (GAM)
 This project focuses on identifying non-linear patterns in child malnutrition in Zambia.
 
