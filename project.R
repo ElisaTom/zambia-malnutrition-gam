@@ -20,7 +20,7 @@ library(haven)
 # --- 2. DATA LOADING ---
 filename <- "zambia_height92.dta"
 
-# Robust loading mechanism:
+# Loading mechanism:
 # Allows the script to run on different machines without changing paths manually.
 if (file.exists(filename)) {
   message("Loading dataset from working directory...")
@@ -43,14 +43,14 @@ if (mean(abs(zambia_data$zscore), na.rm = TRUE) > 10) {
 }
 
 # 3.2 Factor Conversion
-# As per Lab 6 guidelines, categorical variables must be explicitly defined as factors
+# As per Lab 6, categorical variables must be explicitly defined as factors
 # to ensure R treats them as groups rather than numeric values.
 zambia_data$c_gender    <- factor(zambia_data$c_gender, labels = c("Female", "Male"))
 zambia_data$m_work      <- factor(zambia_data$m_work, labels = c("No", "Yes"))
 zambia_data$m_education <- factor(zambia_data$m_education) 
 zambia_data$region      <- factor(zambia_data$region)
 
-# CRITICAL NOTE: 'c_breastf' (breastfeeding duration) is kept NUMERIC.
+# NOTE: 'c_breastf' (breastfeeding duration) is kept numeric
 # This allows the GAM to estimate a smooth curve s(c_breastf) to detect
 # non-linear trends over time, which would be lost if converted to a factor.
 
@@ -77,10 +77,10 @@ lm_model <- lm(zscore ~ c_age + c_gender + c_breastf +
 
 # 4.2 GAM MODEL (Non-Linear Analysis)
 # We fit a Generalized Additive Model (Lab 7) with the following theoretical choices:
-# 1. s(): Smooth functions allow for flexible, non-linear relationships.
-# 2. k=15 for c_age: We increase the basis dimension to capture the rapid
-#    "growth faltering" (weaning effect) expected in the first 24 months.
-# 3. method="REML": As discussed in Lecture 21 (Slide 28), we use REML estimation
+# 1. s(): smooth functions allow for flexible, non-linear relationships.
+# 2. k=15 for c_age: we increase the basis dimension to capture the rapid
+#    growth faltering (weaning effect) expected in the first 24 months.
+# 3. method="REML": as discussed in Lecture 21, we use REML estimation
 #    instead of GCV to avoid overfitting (undersmoothing) and ensure robust results.
 
 gam_model <- gam(zscore ~ 
@@ -97,8 +97,8 @@ gam_model <- gam(zscore ~
 
 cat("\n=== CHECKING LINEARITY (EDF ANALYSIS) ===\n")
 # We analyze the Effective Degrees of Freedom (EDF) from the summary.
-# - EDF approx 1: The relationship is linear.
-# - EDF >> 1: The relationship is non-linear (justifying the GAM).
+# - EDF approx 1: the relationship is linear.
+# - EDF >> 1: the relationship is non-linear (justifying the GAM).
 print(summary(gam_model)$s.table)
 
 cat("\n=== VISUAL DIAGNOSTICS 1: RESIDUALS ===\n")
@@ -140,7 +140,7 @@ print(anova(lm_model, gam_model, test = "Chisq"))
 
 # --- 7. PREDICTIVE VALIDATION (Train/Test Split) ---
 cat("\n=== PREDICTIVE PERFORMANCE (Test Set Validation) ===\n")
-# As practiced in Lab 7 (final section), we validate the model on unseen data
+# As practiced in Lab 7, we validate the model on unseen data
 # to ensure the GAM is not simply overfitting the training set.
 
 set.seed(123) 
@@ -179,7 +179,7 @@ if (improvement > 0) {
   cat("CONCLUSION: GAM does not significantly improve predictions.\n")
 }
 
-# --- 8. COMPARATIVE VISUALIZATION (BONUS) ---
+# --- 8. COMPARATIVE VISUALIZATION ---
 cat("\n=== GENERATING COMPARATIVE PLOTS ===\n")
 
 # Plot 1: Actual vs Predicted
@@ -214,4 +214,3 @@ hist(test_data$zscore - pred_lm, breaks=30, main="Linear Residuals",
 hist(test_data$zscore - pred_gam, breaks=30, main="GAM Residuals", 
      xlab="Error", col="lightgreen", border="black")
 
-# --- END OF SCRIPT ---
